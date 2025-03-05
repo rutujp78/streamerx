@@ -5,6 +5,7 @@ const Notification = () => {
     const [notifyEmail, setNotifyEmail] = useState([]);
     const [subject, setSubject] = useState('');
     const [msg, setMsg] = useState('');
+    const jwt_token = localStorage.getItem('jwt_token');
 
     const handleAddEmail = () => {
         setNotifyEmail([...notifyEmail, '']); // Add an empty EnvVar object
@@ -25,7 +26,21 @@ const Notification = () => {
 
     const handleSubmitEmails = async () => {
         try {
-            const resp = await axios.post("http://localhost:8000/notify", { senderEmail: window.localStorage.getItem('email'), emails: notifyEmail, msg: msg, subject: subject });
+            const resp = await axios.post("http://localhost:5001/send-notification", {
+                senderEmail: window.localStorage.getItem('email'),
+                emails: notifyEmail,
+                content: {
+                    msg: msg,
+                    subject: subject
+                },
+                type: 'email',
+                priority: 'promo'
+            }, {
+                headers: {
+                    Authorization: `Bearer ${jwt_token}`
+                }
+            });
+
             // console.log(resp);
             if (resp.status === 200) {
                 // toast logic
