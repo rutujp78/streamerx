@@ -88,7 +88,7 @@ StreamX uses a microservice architecture to handle different functionalities:
 2. **User Management Service**: Manages user authentication, authorization, live chats, emails, and video uploads.
 
 ### Overall Architecture
-![Overall Architecture](./assets/streamXArch.png)
+![Overall Architecture](./assets/new-streamX-arch.png)
 
 ### Live Chat Architecture
 ![Live Chat Architecture](./assets/oauthAndLiveChats.png)
