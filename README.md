@@ -93,6 +93,9 @@ StreamX uses a microservice architecture to handle different functionalities:
 ### Live Chat Architecture
 ![Live Chat Architecture](./assets/oauthAndLiveChats.png)
 
+### Notification Service Architecture
+![Notification Service Architecture](./assets/streamX-Notification_Service_Architecture.png)
+
 
 ## Contributing
 
