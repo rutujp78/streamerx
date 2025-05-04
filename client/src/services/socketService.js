@@ -1,7 +1,7 @@
 import { io } from 'socket.io-client'
 
 export const socketService = (data) => {
-    io('http://localhost:5000', {
+    io('http://localhost:5000/stream-service', {
         autoConnect: false,
         query: {
             instaStreamURL: data.instaStreamURL,

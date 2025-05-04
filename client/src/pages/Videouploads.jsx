@@ -9,14 +9,15 @@ const Videouploads = () => {
         const formData = new FormData();
         formData.append('video', video);
         formData.append('title', data.title);
-        const response = await axios.post('http://localhost:8000/awareness', formData)
+        // const response = await axios.post('http://localhost:8000/awareness', formData)
+        const response = await axios.post('http://localhost:8080/user-service/awareness', formData)
             .then((response) => {
                 console.log(response);
             })
             .catch((err) => {
                 console.log(err);
             })
-        // console.log(response.data);
+        console.log(response.data);
     };
     const changeHandler = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });

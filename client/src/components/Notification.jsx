@@ -26,7 +26,8 @@ const Notification = () => {
 
     const handleSubmitEmails = async () => {
         try {
-            const resp = await axios.post("http://localhost:5001/send-notification", {
+            // const resp = await axios.post("http://localhost:5001/send-notification", {
+            const resp = await axios.post("http://localhost:8080/notification-service/send-notification", {
                 senderEmail: window.localStorage.getItem('email'),
                 emails: notifyEmail,
                 content: {

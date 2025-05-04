@@ -21,7 +21,8 @@ const Login = () => {
 
     const loginHandler = async (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8000/auth/login', data)
+        // axios.post('http://localhost:8000/auth/login', data)
+        axios.post('http://localhost:8080/user-service/auth/login', data)
             .then((response) => {
                 localStorage.setItem('username', response.data.data.username);
                 localStorage.setItem('jwt_token', response.data.token);
@@ -40,7 +41,8 @@ const Login = () => {
     const registerHandler = async (e) => {
         e.preventDefault();
         // console.log(data);
-        axios.post('http://localhost:8000/auth/register', data)
+        // axios.post('http://localhost:8000/auth/register', data)
+        axios.post('http://localhost:8080/user-service/auth/register', data)
             .then(() => {
                 // console.log(response);
                 setShowLogin(!showlogin);

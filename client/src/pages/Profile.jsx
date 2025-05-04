@@ -1,9 +1,8 @@
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Profile = ({ user }) => {
-    const navigate = useNavigate();
     const handleLogOut = async () => {
         try {
             const token = localStorage.getItem('jwt_token');
@@ -15,11 +14,13 @@ const Profile = ({ user }) => {
             localStorage.removeItem('fname');
             localStorage.removeItem('token_expiry');
 
-            const resp = await axios.get('http://localhost:8000/auth/logout', {
+            // const resp = await axios.get('http://localhost:8000/auth/logout', {
+            const resp = await axios.get('http://localhost:8080/user-service/auth/logout', {
                 headers: {
                     "Authorization": token,
                 }
             });
+            console.log(resp.data);
 
             // navigate('/');
             window.location.href = '/';

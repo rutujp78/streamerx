@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const GetVidoes = () => {
     console.log("getvideos");
     const [videos, setVideos] = useState([]);
     const getVideos = async () => {
-        const result = await axios.get('http://localhost:8000/awareness')
+        // const result = await axios.get('http://localhost:8000/awareness')
+        const result = await axios.get('http://localhost:8080/user-service/awareness')
             .then((response) => {
                 console.log(response);
                 return response.data.body;
@@ -29,7 +30,7 @@ const GetVidoes = () => {
         <div>
             {
                 videos.map((video) => {
-                    return (<div>
+                    return (<div key={video.title}> {/*<!--need to add correct key-->*/}
                         <p>{video.title}</p>
                         <video width="320" height="240" controls>
                             <source src={video.location} type="video/ogg" />

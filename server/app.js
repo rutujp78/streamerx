@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
 const configRoutes = require('./Routes/configRoutes.js');
+const { eurekaClient } = require('./config/eurekaConfig.js');
 const { passport, session } = require('./middleware/index.js');
 const { connectDB, corsConfig } = require('./utils/index.js');
 
@@ -20,7 +21,7 @@ app.get('/', (req, res) => {
     // console.log(req);
     res.status(200).json({
         status: true,
-        data: {}
+        data: { message: 'Hello World From User-Service!' }
     });
 });
 
@@ -28,9 +29,19 @@ app.use((req, res) => {
     res.status(404).send("Page not found");
 });
 
-connectDB();
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
+    connectDB();
     console.log("server is running on ", PORT);
+
+    eurekaClient.start((error) => {
+        if(error) {
+            console.log('Error while registration with Eureka Server: ', JSON.stringify(error));
+            if(error.response && error.response.body) console.log(JSON.stringify(error.response.body));
+        }
+        else {
+            console.log('Eureka Registration Successful.');
+        }
+    }); 
 });

@@ -7,8 +7,6 @@ import axios from 'axios';
 
 // import { GiHamburgerMenu } from 'react-icons/gi'
 
-
-
 const Navbar = () => {
     const [showProfile, setShowProfile] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
@@ -22,7 +20,8 @@ const Navbar = () => {
         const checkLoggedIn = async () => {
             const token = localStorage.getItem("jwt_token");
             // console.log(token);
-            const result = await axios.get('http://localhost:8000/auth/user', {
+            // const result = await axios.get('http://localhost:8000/auth/user', {
+            const result = await axios.get('http://localhost:8080/user-service/auth/user', {
                 headers:
                 {
                     "Content-Type": "application/json",

@@ -3,12 +3,14 @@ import axios from "axios";
 export const getYtTokenAndChatId = async (userId) => {
     // get access token
     try {
-        const response = await axios.get('http://localhost:8000/auth/google/accesstoken', { params: { userId } });
+        // const response = await axios.get('http://localhost:8000/auth/google/accesstoken', { params: { userId } });
+        const response = await axios.get('http://localhost:8080/user-service/auth/google/accesstoken', { params: { userId } });
         const ytAccessToken = response.data.accessToken;
         console.log('YTaccessToken: ', ytAccessToken);
     
         // get livechatid
-        const resp = await axios.get('http://localhost:8000/livechat/google/livechatid', { params: { accessToken: ytAccessToken } });
+        // const resp = await axios.get('http://localhost:8000/livechat/google/livechatid', { params: { accessToken: ytAccessToken } });
+        const resp = await axios.get('http://localhost:8080/user-service/livechat/google/livechatid', { params: { accessToken: ytAccessToken } });
         const liveChatId = resp.data.liveChatId;
     
         return { ytAccessToken, liveChatId };
@@ -20,7 +22,8 @@ export const getYtTokenAndChatId = async (userId) => {
 
 export const fetchLiveChat = async (ytAccessToken, liveChatId, nextPageToken, setNextPageToken) => {
         try {
-            const liveChat = await axios.get('http://localhost:8000/livechat/google/getlivechats', { params: { liveChatId, nextPageToken, accessToken: ytAccessToken } });
+            // const liveChat = await axios.get('http://localhost:8000/livechat/google/getlivechats', { params: { liveChatId, nextPageToken, accessToken: ytAccessToken } });
+            const liveChat = await axios.get('http://localhost:8080/user-service/livechat/google/getlivechats', { params: { liveChatId, nextPageToken, accessToken: ytAccessToken } });
             // console.log('msg items array: ', liveChat.data.data.items);
             const msges = liveChat.data.data.items;
             const modifiedMsg = msges.map(msg => {

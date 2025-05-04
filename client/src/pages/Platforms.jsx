@@ -9,11 +9,13 @@ export const Platforms = () => {
     const [userId, setUserId] = useState(window.localStorage.getItem('userId'));
 
     const connectWithYT = async () => {
-        const url = new URL('http://localhost:8000/auth/google');
+        // const url = new URL('http://localhost:8000/auth/google');
+        const url = new URL('http://localhost:8080/user-service/auth/google');
         url.searchParams.append('scope', 'https://www.googleapis.com/auth/youtube.readonly');
         url.searchParams.append('scope', 'https://www.googleapis.com/auth/youtube');
         url.searchParams.append('scope', 'https://www.googleapis.com/auth/youtube.force-ssl');
-        window.open('http://localhost:8000/auth/google/callback', '_self');
+        // window.open('http://localhost:8000/auth/google/callback', '_self');
+        window.open('http://localhost:8080/user-service/auth/google/callback', '_self');
         window.location.href = url.toString();
         // console.log(userId);
         
@@ -21,15 +23,18 @@ export const Platforms = () => {
     }
 
     const connectWithInsta = async () => {
-        const url = new URL('http://localhost:8000/auth/instagram');
-        window.open('http://localhost:8000/auth/instagram/callback', '_self');
+        // const url = new URL('http://localhost:8000/auth/instagram');
+        const url = new URL('http://localhost:8080/user-service/auth/instagram');
+        // window.open('http://localhost:8000/auth/instagram/callback', '_self');
+        window.open('http://localhost:8080/user-service/auth/instagram/callback', '_self');
         window.location.href = url.toString();
         isConnectedInsta(true);
     }
 
     const disconnectWithYT = async () => {
         try {
-            const resp = await axios.post('http://localhost:8000/auth/google/disconnect', { userId });
+            // const resp = await axios.post('http://localhost:8000/auth/google/disconnect', { userId });
+            const resp = await axios.post('http://localhost:8080/user-service/auth/google/disconnect', { userId });
             console.log(resp);
             if(resp.status === 200) isConnectedYt(false);
         } catch (error) {
@@ -40,7 +45,8 @@ export const Platforms = () => {
     useEffect(() => {
         async function getUser() {
             try {
-                const user = await axios.get('http://localhost:8000/auth/user', {
+                // const user = await axios.get('http://localhost:8000/auth/user', {
+                const user = await axios.get('http://localhost:8080/user-service/auth/user', {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': window.localStorage.getItem('jwt_token')
