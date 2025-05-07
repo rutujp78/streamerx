@@ -22,7 +22,7 @@ const Login = () => {
     const loginHandler = async (e) => {
         e.preventDefault();
         // axios.post('http://localhost:8000/auth/login', data)
-        axios.post('http://localhost:8080/user-service/auth/login', data)
+        axios.post('http://localhost:8080/user-service/auth/login', data, { withCredentials: true, })
             .then((response) => {
                 localStorage.setItem('username', response.data.data.username);
                 localStorage.setItem('jwt_token', response.data.token);

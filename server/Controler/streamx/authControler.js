@@ -57,7 +57,7 @@ const loginControler = async (req, res) => {
         expiryTime.setMinutes(expiryTime.getMinutes() + 59);
 
         res.cookie("token", token, cookiesOption);
-        // console.log(userInfo);
+        console.log(userInfo);
         return res.status(200).json({
             status: true,
             data: userInfo,

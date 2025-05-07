@@ -47,7 +47,7 @@ const GoLive = () => {
 
     const handleStart = () => {
         if (!mediaStream) return;
-
+        console.log('trying to connect to socket');
         // websocket setup
         const newSocket = socketService(data);
         setSocket(newSocket);

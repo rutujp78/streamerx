@@ -7,7 +7,7 @@ const { passport, session } = require('./middleware/index.js');
 const { connectDB, corsConfig } = require('./utils/index.js');
 
 app.use(express.json());
-app.use(corsConfig);
+// app.use(corsConfig);
 // for OAuth (google/instagram)
 app.use(cookieParser());
 app.use(session);
